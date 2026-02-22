@@ -1,9 +1,8 @@
 import streamlit as st
 import openai
 
-# Read API key from file
-with open("api_key.txt", "r") as f:
-    api_key = f.read().strip()
+# Get API key from Streamlit secrets
+api_key = st.secrets["OPENROUTER_API_KEY"]
 
 # Initialize OpenAI client with OpenRouter base URL
 client = openai.OpenAI(
