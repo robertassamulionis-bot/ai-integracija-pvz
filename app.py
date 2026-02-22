@@ -1,18 +1,21 @@
 import streamlit as st
 import openai
 
-# Read API key from file
-with open("api_key.txt", "r") as f:
-    api_key = f.read().strip()
+# Streamlit app
+st.title("Text Summarizer using OpenRouter")
+
+# API key input
+api_key = st.text_input("Enter your OpenRouter API key:", type="password")
+
+if not api_key:
+    st.warning("Please enter your OpenRouter API key to continue.")
+    st.stop()
 
 # Initialize OpenAI client with OpenRouter base URL
 client = openai.OpenAI(
     api_key=api_key,
     base_url="https://openrouter.ai/api/v1"
 )
-
-# Streamlit app
-st.title("Text Summarizer using OpenRouter")
 
 # Text area for user input
 user_text = st.text_area("Enter the text you want to summarize:", height=200)
