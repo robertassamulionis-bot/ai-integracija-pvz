@@ -17,6 +17,9 @@ st.title("Text Summarizer using OpenRouter")
 # Text area for user input
 user_text = st.text_area("Enter the text you want to summarize:", height=200)
 
+# Slider for summary length
+summary_length = st.slider("Summary length (words):", min_value=30, max_value=150, value=100)
+
 # Button to trigger summarization
 if st.button("Summarize"):
     if user_text.strip():
@@ -24,7 +27,7 @@ if st.button("Summarize"):
         response = client.chat.completions.create(
             model="stepfun/step-3.5-flash:free",
             messages=[
-                {"role": "user", "content": f"Please summarize the following text:\n\n{user_text}"}
+                {"role": "user", "content": f"Please summarize the following text in approximately {summary_length} words:\n\n{user_text}"}
             ]
         )
         # Extract and display the summary
